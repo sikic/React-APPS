@@ -1,6 +1,7 @@
 import React,{Fragment,useState} from 'react'
 import styled from '@emotion/styled';
-const useMoneda = (label,stateInicial,opciones) =>{
+
+const useCriptomoneda = (label,stateInicial,opciones) =>{
 
 const Label = styled.label`
     font-family:'Bebas Neue',cursive;
@@ -24,27 +25,26 @@ font-size:1.2rem;
 
     //sate de nuestro custom hoook
 const [state, setstate] = useState(stateInicial);
-
-    const SeleccionarMoneda  = () => (
+    const SeleccionarCripto  = () => (
         <Fragment>
             <Label>{label}</Label>
             <Select
                 onChange={e => setstate(e.target.value)}
                 value={state}
             >
-                <option value="">--Seleccione-</option>
+                <option value="">--Seleccione--</option>
                 {opciones.map((opcion)=>(
                     <option
-                     key={opcion.codigo}
-                     value={opcion.codigo}
-                >{opcion.nombre}</option>
+                     key={opcion.CoinInfo.Id}
+                     value={opcion.CoinInfo.Name}
+                >{opcion.CoinInfo.FullName}</option>
                 ))}
             </Select>
         </Fragment>
     ); 
 
     //retornas state, intefaz y funcion que modifica el sate
-    return [state,SeleccionarMoneda,setstate]
+    return [state,SeleccionarCripto,setstate]
 }
 
-export default useMoneda;
+export default useCriptomoneda;

@@ -1,7 +1,9 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import styled from '@emotion/styled';
 
 import useMoneda from '../Hooks/useMoneda'
+import useCriptomoneda from '../Hooks/useCriptomoneda'
+import Axios from 'axios';
 
 const Boton = styled.input`
  margin-top:20px;
@@ -22,6 +24,9 @@ transition:background-color .8s ease;
  `;
 
 const Formulario = () => {
+    //state listado de criptomonedas
+    const [listacripto, setlistacripto] = useState([]);
+
     const MONEDAS = [
         { codigo:'USD',nombre:'Dolar Americano' },
         { codigo:'MXN',nombre:'Peso Mexicano' },
@@ -30,13 +35,46 @@ const Formulario = () => {
 
     ];
 
+    
+
     //uilixamos el hook custom
-    const[moneda,SelectMonedas,setState] = useMoneda('Elige tu moneda','',MONEDAS);
+    const[moneda,SelectMonedas] = useMoneda('Elige tu moneda','',MONEDAS);
 
+    //usamos el useCriptomoneda
+    const[criptomoneda,SelectCripto] = useCriptomoneda('Elige tu criptomoneda','',listacripto);
+
+    //state de error
+    const [error, seterror] = useState(false);
+
+    //funcion del submit
+    const cotizarMoneda = (e) =>{
+        e.preventDefault();
+        //comprobar que la moneda y la cripto no estan vacia
+        if(criptomoneda.trim() === '' || moneda.trim() === '')
+            return seterror(true);
+        
+        //No hay error 
+        seterror(false);
+
+        //pasar datos a App-js
+    }
+    //ejecutar llamado a la api
+    useEffect(() => {
+        const consultarApi = async () =>{
+            const url='https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD';
+
+            const resultado = await Axios.get(url);
+            setlistacripto(resultado.data.Data);
+        }
+       consultarApi();
+    }, [])
     return (
-        <form>
-
+        <form
+            onSubmit={cotizarMoneda}
+        >
+            {error ? 'Hay un error' : null}
             <SelectMonedas />
+            <SelectCripto />
             <Boton
                 type="submit"
                 value="Calcular"
