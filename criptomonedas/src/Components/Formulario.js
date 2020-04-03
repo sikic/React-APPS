@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import styled from '@emotion/styled';
-
+import Error from './Error'
 import useMoneda from '../Hooks/useMoneda'
 import useCriptomoneda from '../Hooks/useCriptomoneda'
 import Axios from 'axios';
@@ -23,7 +23,7 @@ transition:background-color .8s ease;
 }
  `;
 
-const Formulario = () => {
+const Formulario = ({setmoneda,setcriptomoneda}) => {
     //state listado de criptomonedas
     const [listacripto, setlistacripto] = useState([]);
 
@@ -57,6 +57,8 @@ const Formulario = () => {
         seterror(false);
 
         //pasar datos a App-js
+        setmoneda(moneda);
+        setcriptomoneda(criptomoneda);
     }
     //ejecutar llamado a la api
     useEffect(() => {
@@ -72,7 +74,7 @@ const Formulario = () => {
         <form
             onSubmit={cotizarMoneda}
         >
-            {error ? 'Hay un error' : null}
+            {error ? <Error mensaje='Todos los campos son obligatorios'/> : null}
             <SelectMonedas />
             <SelectCripto />
             <Boton
