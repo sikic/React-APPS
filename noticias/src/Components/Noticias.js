@@ -1,4 +1,5 @@
 import React,{Fragment} from 'react'
+import './Noticias.css'
 
 const Noticias = ({noticia}) => {
     //extraer los datos
@@ -8,7 +9,7 @@ const Noticias = ({noticia}) => {
     //si no hay imagen 
     const imagen = (urlToImage) ?
     <div className="card-image">
-        <img src={urlToImage} alt ={title}/>
+        <img src={urlToImage} alt ={title} className="imagenFija"/>
         <span className="card-title">{source.name}</span>
     </div>
     :null;
