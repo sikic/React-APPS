@@ -25,7 +25,7 @@ const Noticias = ({noticia}) => {
                 </div>
 
                 <div className="card-action">
-                    <a href={source}> Ver más</a>
+                    <a href={url}> Ver más</a>
                 </div>
            </div>
         </div>
