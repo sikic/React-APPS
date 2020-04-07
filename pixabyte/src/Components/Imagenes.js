@@ -12,11 +12,11 @@ const Imagenes = ({actual}) => {
 
                 <div className="card-body">
                     <p className="card-text">
-                        {likes} me gusta
+                        {likes} <i class="icono em em---1" aria-role="presentation" aria-label="THUMBS UP SIGN"></i>
                     </p>
 
                     <p className="card-text">
-                        {views} visitas
+                        {views} <i class="em em-eyeglasses" aria-role="presentation" aria-label="EYEGLASSES"></i>
                     </p>
                 </div>
 

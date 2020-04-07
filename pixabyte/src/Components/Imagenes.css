@@ -15,3 +15,8 @@ div.content img {
       object-position: center center;
     }
 }
+
+.icono{
+    width: 20px;
+    margin-bottom: 10px;
+}
