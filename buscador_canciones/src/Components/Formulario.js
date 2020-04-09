@@ -1,6 +1,6 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 
-const Formulario = () => {
+const Formulario = ({setterminosBusqueda}) => {
 //state
     const [busqueda, setbusqueda] = useState({
         artista:'',
@@ -29,9 +29,14 @@ const Formulario = () => {
         seterror(false);
 
         //pasar al componente ppal
+        setterminosBusqueda(busqueda);
     }
+
     return (
         <div className="bg-info">
+                    {error ? <p className="alert alert-danger text-center p-2"> Todos los datos son obligatorios</p>
+                    : null    
+                }
             <div className="container">
                 <div className="row">
                     <form
