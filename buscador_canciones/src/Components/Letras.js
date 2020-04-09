@@ -2,7 +2,7 @@ import React,{Fragment} from 'react'
 
 const Letras = ({letra}) => {
 
-    if(Object.keys(letra).length===0) return null;
+    if(letra === undefined) return null;
     
     return (
         <Fragment>
