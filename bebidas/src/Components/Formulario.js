@@ -7,6 +7,8 @@ const Formulario = () => {
     const { categorias } = useContext(CategoriasContext);
     const { setbusqueda,setconsultar } = useContext(RecetasContext);
 
+    //state para los errores
+    const [error, seterror] = useState(false);
     //state para los datos del fomrulario
     const [datos, setdatos] = useState({
         nombre:'',
@@ -25,10 +27,17 @@ const Formulario = () => {
             className="col-12"
             onSubmit={e=>{
                 e.preventDefault();
+                if(datos.nombre.trim() === '' || datos.categoria.trim() === '')
+                    return seterror(true);
+
+                seterror(false);
                 setbusqueda(datos);
                 setconsultar(true);
             }}
         >
+            {error
+             ? 
+             <p className="alert alert-danger">Todos los campos son obligatorios</p> : null }
             <fieldset className="text-center">
                 <legend>Busca bebidas por categoria o ingrediente</legend>
             </fieldset>
