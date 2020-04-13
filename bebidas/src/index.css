@@ -19,3 +19,9 @@ h1 {
   text-align: center;
   font-size: 3rem;
 }
+
+.scroll{
+  height: 700px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
