@@ -1,5 +1,5 @@
-import React,{Fragment,useState} from 'react'
-
+import React,{Fragment,useState,useContext} from 'react'
+import ProyectoContext from '../../Context/proyectos/ProyectoContext'
 const NuevoProyecto = () => {
 
     //state para proyecto
@@ -9,6 +9,10 @@ const NuevoProyecto = () => {
     
     //state para el error
     const [error, seterror] = useState(false);
+
+    //obtener state del formulario
+    const proyectosContext = useContext(ProyectoContext);
+    const {formulario,mostrarFormulario} = proyectosContext;
 
     const onchange=(e)=>{
         setproyecto({
@@ -23,7 +27,6 @@ const NuevoProyecto = () => {
     const hadleonsubmit=(e)=>{
         e.preventDefault();
 
-
         //validar el nombre
         if(nombre.trim() ==='')
             return seterror(true);
@@ -34,20 +37,15 @@ const NuevoProyecto = () => {
         //reiniciar el form
         
     }
-    return (
-        <Fragment>
-            <button 
-            type="button"
-            className="btn btn-block btn-primario"
-            
-            >
-                Nuevo Proyecto
-            </button>
-    
+
+    const mostrar=(f)=>{
+        console.log(f);
+        if(f)
+            return( 
             <form
                 className="formulario-nuevo-proyecto"
                 onSubmit={hadleonsubmit}
-            >
+                >
                 <input
                     type="text"
                     className="input-text"
@@ -63,7 +61,23 @@ const NuevoProyecto = () => {
                     value="Agregar proyecto"
                 />
                 
-            </form>
+            </form>);
+            else
+                return null;
+    }
+    return (
+        <Fragment>
+            <button 
+            type="button"
+            className="btn btn-block btn-primario"
+            onClick={()=> mostrarFormulario()}
+            >
+                Nuevo Proyecto
+            </button>
+    
+            {
+                mostrar(formulario)
+            }
 
         </Fragment>
     )
