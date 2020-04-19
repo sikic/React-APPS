@@ -1,6 +1,13 @@
-import React from 'react'
+import React,{Fragment,useContext} from 'react'
+import ProyectoContext from '../../Context/proyectos/ProyectoContext'
 
 const Tarea = ({tarea}) => {
+
+    
+    const proyectoContext = useContext(ProyectoContext);
+
+    const { eliminarProyecto,proyecto } = proyectoContext;
+
     return (
 
         <li className="tarea sombra">
@@ -43,7 +50,7 @@ const Tarea = ({tarea}) => {
                      className="btn btn-secundario"            
                    >
                 >
-                    Eliminart
+                    Eliminar
                 </button>
             </div>
         </li>

@@ -3,43 +3,44 @@ import ProyectoContext from '../../Context/proyectos/ProyectoContext'
 const NuevoProyecto = () => {
 
     //state para proyecto
-    const [proyecto, setproyecto] = useState({
+    const [proyectos, setproyecto] = useState({
         nombre:''
     });
     
-    //state para el error
-    const [error, seterror] = useState(false);
+    
 
     //obtener state del formulario
     const proyectosContext = useContext(ProyectoContext);
-    const {formulario,mostrarFormulario} = proyectosContext;
+    const { proyecto, errorFormulario ,formulario ,mostrarFormulario,agregarProyecto,mostrarError} = proyectosContext;
 
     const onchange=(e)=>{
         setproyecto({
-            ...proyecto,
+            ...proyectos,
             [e.target.name]:e.target.value
         }) 
     }
     
-    const {nombre} = proyecto;
+    const {nombre} = proyectos;
     
 
     const hadleonsubmit=(e)=>{
         e.preventDefault();
 
         //validar el nombre
-        if(nombre.trim() ==='')
-            return seterror(true);
+        if(nombre.trim() === '')
+           return mostrarError();
 
-        seterror(false);
         //agregar al state 
         setproyecto(nombre);
+        agregarProyecto(proyectos);
         //reiniciar el form
+        setproyecto({
+            nombre:''
+        })
         
     }
 
     const mostrar=(f)=>{
-        console.log(f);
         if(f)
             return( 
             <form
@@ -50,7 +51,7 @@ const NuevoProyecto = () => {
                     type="text"
                     className="input-text"
                     placeholder="Nombre Proyecto"
-                    nanme="nombre"
+                    name="nombre"
                     value={nombre}
                     onChange={onchange}
                 />
@@ -78,7 +79,13 @@ const NuevoProyecto = () => {
             {
                 mostrar(formulario)
             }
-
+            
+            {errorFormulario 
+            ?
+                <p className="mensaje error"> El nombre es obligatorio</p>
+            :
+            null 
+            }
         </Fragment>
     )
 }
