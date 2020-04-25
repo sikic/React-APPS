@@ -11,7 +11,7 @@ const NuevoProyecto = () => {
 
     //obtener state del formulario
     const proyectosContext = useContext(ProyectoContext);
-    const { proyecto, errorFormulario ,formulario ,mostrarFormulario,agregarProyecto,mostrarError} = proyectosContext;
+    const { errorFormulario ,formulario ,mostrarFormulario,agregarProyecto,mostrarError} = proyectosContext;
 
     const onchange=(e)=>{
         setproyecto({

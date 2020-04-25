@@ -1,12 +1,15 @@
-import React,{Fragment,useContext} from 'react'
+import React,{useContext} from 'react'
 import ProyectoContext from '../../Context/proyectos/ProyectoContext'
+import TareasContext from '../../Context/Tareas/TareaContex'
 
 const Tarea = ({tarea}) => {
 
     
     const proyectoContext = useContext(ProyectoContext);
+    const { proyecto } = proyectoContext;
 
-    const { eliminarProyecto,proyecto } = proyectoContext;
+    const tareasContext = useContext(TareasContext);
+    const { eliminarTarea,obtenerTareas,cambiarEstado,tareaActual } = tareasContext;
 
     return (
 
@@ -22,6 +25,13 @@ const Tarea = ({tarea}) => {
                     <button
                         type="button"
                         className="completo"
+                        onClick={()=>{
+                            if(tarea.estado)
+                                tarea.estado=false;
+                            else
+                                tarea.estado = true;
+
+                            cambiarEstado(tarea)}}
                     >
                         Completo
                     </button>
@@ -30,6 +40,12 @@ const Tarea = ({tarea}) => {
                     <button
                     type="button"
                     className="incompleto"
+                    onClick={()=>{
+                        if(tarea.estado)
+                            tarea.estado=false;
+                        else
+                            tarea.estado = true;
+                        cambiarEstado(tarea)}}
                 >
                     Incompleto
                 </button>
@@ -40,14 +56,21 @@ const Tarea = ({tarea}) => {
             <div className="acciones">
                 <button
                   type="button"
-                  className="btn btn-primario"            
+                  className="btn btn-primario"  
+                  onClick={() =>{
+                      tareaActual(tarea)
+                  }}          
                 >
                     Editar
                 </button>
 
                 <button
                      type="button"
-                     className="btn btn-secundario"            
+                     className="btn btn-secundario"
+                     onClick={()=> {
+                         eliminarTarea(tarea)
+                         obtenerTareas(proyecto[0])
+                        }}            
                    >
                 >
                     Eliminar
