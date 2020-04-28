@@ -12,8 +12,12 @@ conectarDb();
 //puerto de la app 
 const PORT = process.env.PORT || 4000;
 
-//importar el router
+//importar el router usuarios
 app.use('/api/usuarios',require('./routes/usuarios'));
+//importar el router auth
+app.use('/api/auth',require('./routes/auth'));
+//importar el router proyectos
+app.use('/api/proyectos',require('./routes/proyectos'));
 
 //ruta principal
 app.get('/',(req,res)=>{

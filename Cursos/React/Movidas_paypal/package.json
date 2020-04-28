@@ -1,0 +1,14 @@
+{
+  "name": "movidas_skype",
+  "version": "1.0.0",
+  "description": "pruebas skype",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@paypal/checkout-server-sdk": "^1.0.2"
+  }
+}
