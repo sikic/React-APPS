@@ -9,39 +9,33 @@ import {
 
 export default (state, action) => {
     switch (action.type) {
-        case LOGIN_ERROR:
-            return {
-                alerta: action.payload
-            };
-
-        case LOGIN_EXITOSO:
-            return {
-                alerta: null
-            }
-
-
         case OBTENER_USUARIO:
             return {
-                alerta: null
+                ...state,
+                autenticado: true,
+                usuario: action.payload,
+                cargando: false
             }
 
-        case REGISTRO_ERROR:
-            return{
-                ...state,
-                autenticado:false,
-                mensaje: action.payload
-            }
-        case REGISTRO_EXITOSO:
-           localStorage.setItem('token',action.payload.token);
-            return{
-                ...state,
-                autenticado:true,
-                mensaje:null
-            }
-        case CERRAR_SESION:
+        case LOGIN_ERROR, REGISTRO_ERROR, CERRAR_SESION:
+            localStorage.removeItem('token');
             return {
-                alerta: null
+                ...state,
+                autenticado: false,
+                token: null,
+                usuario: null,
+                mensaje: action.payload,
+                cargando: false
             }
+        case REGISTRO_EXITOSO, LOGIN_EXITOSO:
+            localStorage.setItem('token', action.payload);
+            return {
+                ...state,
+                autenticado: true,
+                mensaje: null,
+                cargando: false
+            }
+
         default:
             return state;
     }

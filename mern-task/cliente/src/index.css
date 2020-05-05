@@ -276,7 +276,9 @@ aside  {
   color: var(--blanco);
 }
 
-
+.blanco{
+  color: aliceblue;
+}
 
 .tarea-enter,
 .proyecto-enter {
