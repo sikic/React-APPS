@@ -199,6 +199,17 @@ aside  {
   margin-top: 5rem;
 }
 
+.alerta-error-proyecto{
+  background-color: red;
+  color: var(--blanco);
+  position: absolute;
+  padding: 2rem;
+  font-size: 2rem;
+  top:0;
+  left: 50%;
+  margin-top: 2rem;
+}
+
 .listado-tareas {
   max-width: 600px;
   margin: 0 auto;
