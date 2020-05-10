@@ -1,4 +1,4 @@
-import React, { useState, useContext,useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import AlertaContext from '../../Context/alertas/AlertaContext'
 import AuthContext from '../../Context/authentication/authContext'
@@ -14,14 +14,14 @@ const Login = (props) => {
 
     useEffect(() => {
         //si se logea le redirigimos a proyectos
-        if(autenticado)
-            props.history.push('/proyectos')  
+        if (autenticado)
+            props.history.push('/proyectos')
 
         //si hay algun error deberia saltar el mensaje
-        if(mensaje)
-            mostrarAlerta(mensaje.msg,mensaje.categoria)
-
-    }, [autenticado,mensaje, props.history])
+        if (mensaje)
+            mostrarAlerta(mensaje.msg, mensaje.categoria)
+        //eslint-disable-next-line
+    }, [autenticado, mensaje, props.history])
 
     //state incio sesion
     const [credenciales, setcredenciales] = useState({

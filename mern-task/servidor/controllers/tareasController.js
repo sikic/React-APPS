@@ -10,7 +10,7 @@ module.exports = {
             return res.status(400).json({ errores: error.array() })
         }
 
-        const { proyecto } = req.body;
+        const { proyecto } = req.query;
 
         try {
             //hay que buscar el proyecto de ese tarea
@@ -82,8 +82,8 @@ module.exports = {
             if (p.creador.toString() !== req.usuario.id) return res.status(401).json({ msg: 'No autorizado' })
 
             const TareaNueva = {};
-            if (nombre) TareaNueva.nombre = nombre;
-            if (estado) TareaNueva.estado = estado;
+            TareaNueva.nombre = nombre;
+            TareaNueva.estado = estado;
 
             //guardar la tarea
             tarea = await modeloTareas.findOneAndUpdate({ _id: req.params.id }, TareaNueva, { new: true })
@@ -105,7 +105,7 @@ module.exports = {
             if (!tarea)
                 return res.status(401).json({ msg: 'tarea inexistente' });
 
-            const { proyecto } = req.body
+            const { proyecto } = req.query;
             //hay que buscar el proyecto de ese tarea
             const p = await modeloProyecto.findById(proyecto);
 

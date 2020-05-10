@@ -5,10 +5,11 @@ import AuthContext from '../../Context/authentication/authContext'
 const RutaPrivada = ({ component: Component, ...props }) => {
 
     const authContext = useContext(AuthContext);
-    const { autenticado,cargando,usuarioAutenticado } = authContext;
+    const { autenticado,usuarioAutenticado } = authContext;
     
     useEffect(() => {
         usuarioAutenticado();
+        //eslint-disable-next-line
     }, []);
 
     

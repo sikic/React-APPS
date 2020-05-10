@@ -17,7 +17,9 @@ export default (state, action) => {
                 cargando: false
             }
 
-        case LOGIN_ERROR, REGISTRO_ERROR, CERRAR_SESION:
+        case LOGIN_ERROR:
+        case REGISTRO_ERROR:
+        case CERRAR_SESION:
             localStorage.removeItem('token');
             return {
                 ...state,
@@ -27,7 +29,8 @@ export default (state, action) => {
                 mensaje: action.payload,
                 cargando: false
             }
-        case REGISTRO_EXITOSO, LOGIN_EXITOSO:
+        case REGISTRO_EXITOSO:
+        case LOGIN_EXITOSO:
             localStorage.setItem('token', action.payload);
             return {
                 ...state,

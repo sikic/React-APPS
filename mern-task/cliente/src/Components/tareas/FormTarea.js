@@ -61,8 +61,7 @@ const FormTarea = () => {
             editarTarea(tarea);
         }else{
             //agregar la nueva tarea 
-            tarea.proyectoId = proyecto[0].id;
-            tarea.estado = false;
+            tarea.proyecto = proyecto[0]._id;
             agregarTarea(tarea);
         }    
         //reiniciar form;

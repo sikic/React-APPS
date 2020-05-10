@@ -5,25 +5,26 @@ import AuthContext from '../../Context/authentication/authContext'
 const Barra = () => {
 
     const authContext = useContext(AuthContext);
-    const { usuario,usuarioAutenticado,cerrarSesion } = authContext;
+    const { usuario, usuarioAutenticado, cerrarSesion } = authContext;
 
     useEffect(() => {
-        usuarioAutenticado()
+        usuarioAutenticado();
+        //eslint-disable-next-line
     }, []);
 
     return (
         <header className="app-header">
-            {usuario 
-            ? 
-            <p className="nombre-usuario mover">Hola <span>{usuario.nombre}</span></p>            
-            : null}
+            {usuario
+                ?
+                <p className="nombre-usuario mover">Hola <span>{usuario.nombre}</span></p>
+                : null}
 
             <nav className="nav-principal">
-               <button
+                <button
                     className="btn btn-blank cerrar-sesion blanco"
-                     onClick={() => cerrarSesion()}
-               >
-                   Cerrar Sesion
+                    onClick={() => cerrarSesion()}
+                >
+                    Cerrar Sesion
                </button>
             </nav>
         </header>
