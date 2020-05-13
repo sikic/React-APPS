@@ -5,10 +5,15 @@ import Productos from './components/Productos'
 import NuevoProducto from './components/NuevoProducto'
 import EditarProducto from './components/EditarProducto'
 
+//redux
+import {Provider} from 'react-redux'
+import store from './store'
 
 function App() {
   return (
    <Router>
+     <Provider store = {store}>
+
      <Header/>
 
      <div className ="container mt-5">
@@ -19,6 +24,7 @@ function App() {
 
         </Switch>
      </div>
+     </Provider>
    </Router>
   );
 }
