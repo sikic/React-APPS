@@ -1,7 +1,10 @@
 import {
     AGREGAR_PRODUCTO,
     AGREGAR_PRODUCTO_EXITO,
-    AGREGAR_PRODUCTO_ERROR
+    AGREGAR_PRODUCTO_ERROR,
+    COMENZAR_DESCARGA_PRODUCTOS,
+    DESCARGA_PRODUCTOS_ERROR,
+    DESCARGA_PRODUCTOS_EXITO
 } from '../types'
 import clienteAxios from '../config/Axios'
 import Swal from 'sweetalert2'
@@ -29,8 +32,8 @@ export function crearNuevoProductoAction(producto) {
             //alerta chula de error
             Swal.fire({
                 icon: 'error',
-                title:'Hubo un error',
-                text:'Hubo un error, inténtelo de nuevo.'
+                title: 'Hubo un error',
+                text: 'Hubo un error, inténtelo de nuevo.'
             })
 
         }
@@ -49,4 +52,34 @@ const agregarProductoExito = (producto) => ({
 const agregarProductoError = (estadoError) => ({
     type: AGREGAR_PRODUCTO_ERROR,
     payload: estadoError
+})
+
+export function descargarProductos() {
+    return async (dispatch) => {
+        dispatch(descargarProductosinicio());
+
+        try {
+            setTimeout(async () => {
+                const productos = await clienteAxios.get('/productos');
+                dispatch(descargaExito(productos.data));
+            }, 1000);
+        } catch (error) {
+            dispatch(descargaError());
+        }
+    }
+}
+
+const descargarProductosinicio = () => ({
+    type: COMENZAR_DESCARGA_PRODUCTOS,
+    payload: true
+})
+
+const descargaExito = (productos) => ({
+    type: DESCARGA_PRODUCTOS_EXITO,
+    payload: productos
+})
+
+const descargaError = () => ({
+    type: DESCARGA_PRODUCTOS_ERROR,
+    payload: true
 })

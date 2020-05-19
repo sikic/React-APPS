@@ -32,7 +32,7 @@ const NuevoProducto = ({history}) => {
         });
 
         //redireccionar al inicio
-        history.push('/');
+        history.push('/'); 
     }
 
     return (
