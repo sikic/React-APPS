@@ -42,12 +42,15 @@ const Productos = () => {
 
                     <tbody>
                         {productos.length === 0 ? 'No hay Productos' :
-                        (productos.map(p=>(
+                        (productos.map(p=>{
+                            return(
                             <Producto
                                 key={p.id}
                                 p={p}
-                            />
-                        )))
+                            />)
+
+                        }
+                        ))
                         }
                     </tbody>
             </table>

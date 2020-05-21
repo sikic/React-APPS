@@ -4,7 +4,10 @@ import {
     AGREGAR_PRODUCTO_ERROR,
     COMENZAR_DESCARGA_PRODUCTOS,
     DESCARGA_PRODUCTOS_ERROR,
-    DESCARGA_PRODUCTOS_EXITO
+    DESCARGA_PRODUCTOS_EXITO,
+    OBTENER_PRODUCTO_ELIMINAR,
+    PRODUCTO_ELIMINADO_ERROR,
+    PRODUCTO_ELIMINADO_EXITO
 } from '../types'
 import clienteAxios from '../config/Axios'
 import Swal from 'sweetalert2'
@@ -16,10 +19,9 @@ export function crearNuevoProductoAction(producto) {
 
         try {
             //insertar en la API
-            await clienteAxios.post('/productos', producto);
-
+            const resultado = await clienteAxios.post('/productos', producto);
             //si todo ok, actualizar estate si no lanzar el error
-            dispacth(agregarProductoExito(producto));
+            dispacth(agregarProductoExito(resultado.data));
             //alerta chula
             Swal.fire(
                 'Correcto',
@@ -81,5 +83,39 @@ const descargaExito = (productos) => ({
 
 const descargaError = () => ({
     type: DESCARGA_PRODUCTOS_ERROR,
+    payload: true
+})
+
+//Seleccion y elimina el producto
+export function borrarProducto(id){
+    return async (dispacth) =>{
+        dispacth(obtenerProductoEliminar(id) );
+
+        try {
+            const eliminado = await clienteAxios.delete(`/productos/${id}`);
+            dispacth(eliminarProductoExito());
+            Swal.fire(
+                'Alehop!! Eliminado',
+                'El articulo se ha eliminado correctamente',
+                'success'
+            )
+        } catch (error) {
+            console.log(error)
+            dispacth(eliminarProductoError());
+        }
+    }
+}
+
+const obtenerProductoEliminar = (id) => ({
+    type: OBTENER_PRODUCTO_ELIMINAR,
+    payload: id
+})
+
+const eliminarProductoExito = () => ({
+    type: PRODUCTO_ELIMINADO_EXITO
+})
+
+const eliminarProductoError = () => ({
+    type: PRODUCTO_ELIMINADO_ERROR,
     payload: true
 })
