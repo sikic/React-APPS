@@ -7,7 +7,11 @@ import {
     DESCARGA_PRODUCTOS_EXITO,
     OBTENER_PRODUCTO_ELIMINAR,
     PRODUCTO_ELIMINADO_ERROR,
-    PRODUCTO_ELIMINADO_EXITO
+    PRODUCTO_ELIMINADO_EXITO,
+    OBTENER_PRODUCTO_EDITAR,
+    COMENZAR_EDICION_PRODUCTO,
+    PRODUCTO_EDITADO_EXITO,
+    PRODUCTO_EDITADO_ERROR
 } from '../types'
 import clienteAxios from '../config/Axios'
 import Swal from 'sweetalert2'
@@ -87,9 +91,9 @@ const descargaError = () => ({
 })
 
 //Seleccion y elimina el producto
-export function borrarProducto(id){
-    return async (dispacth) =>{
-        dispacth(obtenerProductoEliminar(id) );
+export function borrarProducto(id) {
+    return async (dispacth) => {
+        dispacth(obtenerProductoEliminar(id));
 
         try {
             const eliminado = await clienteAxios.delete(`/productos/${id}`);
@@ -117,5 +121,49 @@ const eliminarProductoExito = () => ({
 
 const eliminarProductoError = () => ({
     type: PRODUCTO_ELIMINADO_ERROR,
+    payload: true
+})
+
+//colocar producto en edicion
+
+export function obtenerProductoEditar(producto) {
+    return (dispacth) => {
+        dispacth(obtenerProducto(producto));
+    }
+}
+
+const obtenerProducto = producto => ({
+    type: OBTENER_PRODUCTO_EDITAR,
+    payload: producto
+})
+
+export function editarProducto(producto) {
+    return async dispacth => {
+        dispacth(comienzoEditarProducto(producto));
+        try {
+            const resultado = await clienteAxios.put(`/productos/${producto.id}`,producto);
+            console.log(resultado);
+            dispacth(editadoExito(producto));
+
+        } catch (error) {
+            dispacth(editadoError());
+
+        }
+
+    }
+}
+
+const comienzoEditarProducto = producto => ({
+    type: COMENZAR_EDICION_PRODUCTO,
+    payload: producto
+})
+
+const editadoExito = () => ({
+    type: PRODUCTO_EDITADO_EXITO,
+    payload: true
+})
+
+const editadoError = producto => ({
+    type: PRODUCTO_EDITADO_ERROR,
     payload: true
 })
