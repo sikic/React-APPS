@@ -139,28 +139,23 @@ const obtenerProducto = producto => ({
 
 export function editarProducto(producto) {
     return async dispacth => {
-        dispacth(comienzoEditarProducto(producto));
+        dispacth(comienzoEditarProducto());
         try {
-            const resultado = await clienteAxios.put(`/productos/${producto.id}`,producto);
-            console.log(resultado);
+            await clienteAxios.put(`/productos/${producto.id}`,producto);
             dispacth(editadoExito(producto));
-
         } catch (error) {
             dispacth(editadoError());
-
         }
-
     }
 }
 
 const comienzoEditarProducto = producto => ({
-    type: COMENZAR_EDICION_PRODUCTO,
-    payload: producto
+    type: COMENZAR_EDICION_PRODUCTO
 })
 
-const editadoExito = () => ({
+const editadoExito = (producto) => ({
     type: PRODUCTO_EDITADO_EXITO,
-    payload: true
+    payload: producto
 })
 
 const editadoError = producto => ({

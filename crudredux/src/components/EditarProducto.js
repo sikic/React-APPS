@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { editarProducto } from '../actions/productoActions'
+import {useHistory} from 'react-router-dom'
 const EditarProducto = () => {
+    const history= useHistory();
     const dispatch = useDispatch();
     //nuevo state de producto
     const [producto, setproducto] = useState({
@@ -12,9 +14,9 @@ const EditarProducto = () => {
     const productoEditar = useSelector(state => state.productos.productoEditar);
     useEffect(() => {
         setproducto(productoEditar);
-        console.log(productoEditar)
     }, [productoEditar]);
     
+    const { nombre, precio } = producto;
     
     //Leer datos del formulario
     const onChangeFormulario = e => {
@@ -23,12 +25,11 @@ const EditarProducto = () => {
             [e.target.name]: e.target.value
         });
     }
-    const { nombre, precio } = productoEditar;
 
     const submitEditar = e => {
         e.preventDefault();
-
         dispatch(editarProducto(producto));
+        history.push('/');
     }
 
     return (
@@ -48,12 +49,12 @@ const EditarProducto = () => {
                                 <input
                                     type="text"
                                     className="form-control"
-                                    placeholder="Nombre Producto"
                                     name="nombre"
                                     value={nombre}
                                     onChange={onChangeFormulario}
                                 />
                             </div>
+                            
 
                             <div className="form-group">
                                 <label>Precio Producto</label>

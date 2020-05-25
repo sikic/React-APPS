@@ -1,14 +1,9 @@
 {
   "productos": [
     {
-      "nombre": "Jugo de Fresas",
-      "precio": "200",
+      "nombre": "Fresas Rojas",
+      "precio": "300",
       "id": 5
-    },
-    {
-      "nombre": "cocoa",
-      "precio": 123,
-      "id": 7
     },
     {
       "nombre": "Lemon",
@@ -16,19 +11,14 @@
       "id": 8
     },
     {
-      "nombre": "LUIS ANTONIO",
-      "precio": 12,
-      "id": 10
+      "nombre": "chocolate",
+      "precio": 120,
+      "id": 13
     },
     {
-      "nombre": "cocoa",
-      "precio": 12,
-      "id": 11
-    },
-    {
-      "nombre": "ds",
-      "precio": 3,
-      "id": 12
+      "nombre": "prueba",
+      "precio": 123,
+      "id": 16
     }
   ]
 }

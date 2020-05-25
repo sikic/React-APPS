@@ -19,7 +19,7 @@ const initialState = {
     error: null,
     loading: false,
     productoEliminar: null,
-    productoEditar : null
+    productoEditar: null
 }
 
 export default function (state = initialState, action) {
@@ -29,11 +29,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 loading: false,
-                productos: [...state.productos, action.payolad]
+                productos: [...state.productos, action.payload]
             }
         case AGREGAR_PRODUCTO_ERROR:
         case DESCARGA_PRODUCTOS_ERROR:
         case PRODUCTO_ELIMINADO_ERROR:
+        case PRODUCTO_EDITADO_ERROR:
             return {
                 ...state,
                 loading: false,
@@ -71,6 +72,15 @@ export default function (state = initialState, action) {
                 ...state,
                 productoEditar: action.payload
             }
+        case PRODUCTO_EDITADO_EXITO: {
+            return {
+                ...state,
+                productoEditar: null,
+                productos: state.productos.map(p =>
+                    p.id === action.payload.id ? p = action.payload : p
+                )
+            }
+        }
         default:
             return state;
     }
