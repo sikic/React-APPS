@@ -3,13 +3,14 @@ const conectarDb = require('./config/db');
 const cors = require('cors');
 //crear el servidor
 const app = express();
+const p = require("./prueba.js");
 
 //habilitamos el exprees json
 app.use(express.json({extended:true}));
 
 //conectar a la base de datos
 conectarDb();
-
+p.pruebaa();
 //habilitar cors
 app.use(cors());
 //puerto de la app 

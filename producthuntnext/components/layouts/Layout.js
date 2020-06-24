@@ -10,7 +10,7 @@ const Layout = (props) => {
             styles ={css`
                 :root{
                     --gris:#3d3d3d;
-                    --gris2:#6f6f6f;
+                    --gris2:#5F5F5F;
                     --gris3:#e1e1e1;
                     --naranja : #DA552F;
                 }
